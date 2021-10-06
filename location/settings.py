@@ -41,6 +41,7 @@ MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -73,8 +74,8 @@ WSGI_APPLICATION = 'location.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-username= config('USERNAME')
-password= config('PASSWORD')
+username= config('USERNAME',cast=str)
+password= config('PASSWORD',cast=str)
 
 mongo_url = 'mongodb+srv://{username}:{password}@cluster0.dxnzx.mongodb.net/Location?retryWrites=true&w=majority'.format(username=username, password=password)
 
