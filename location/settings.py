@@ -9,8 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-esp-b-x33l5ccp=s_oa52^uj+e-sabd7zo04vur1x8nuqkt-y)'
-
+SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -20,6 +19,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ORIGIN_WHITELIST = [
     'http://127.0.0.1:3000',
+    'http://127.0.0.1:3001',
 ]
 
 # Application definition
@@ -73,8 +73,10 @@ WSGI_APPLICATION = 'location.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+username= config('USERNAME')
+password= config('PASSWORD')
 
-mongo_url = 'mongodb+srv://illias:41758395@cluster0.dxnzx.mongodb.net/Location?retryWrites=true&w=majority'
+mongo_url = 'mongodb+srv://{username}:{password}@cluster0.dxnzx.mongodb.net/Location?retryWrites=true&w=majority'.format(username=username, password=password)
 
 DATABASES = {
     'default': {
